@@ -25,17 +25,35 @@ def count_visitors():
     except FileNotFoundError:
         print("\nTotal visitors: 0")
 
+def search_visitor():
+    name_to_search = input("Enter the name to search: ")
+    found = False
+    try:
+        with open("visitors.txt", "r") as file:
+            visitors = file.readlines()
+            for visitor in visitors:
+                if visitor.strip().lower() == name_to_search.lower():
+                    found = True
+                    break
+        if found:
+            print(f"{name_to_search} is in the visitor list!")
+        else:
+            print(f"{name_to_search} is NOT in the visitor list.")
+    except FileNotFoundError:
+        print("No visitors yet!")
+
 def show_menu():
     print("\nWhat would you like to do?")
     print("1. Get greeted")
     print("2. Show all visitors")
     print("3. Clear visitor list")
     print("4. Show visitor count")
-    print("5. Exit")
+    print("5. Search for a visitor")
+    print("6. Exit")
 
 while True:
     show_menu()
-    choice = input("Enter your choice (1, 2, 3, 4 or 5): ")
+    choice = input("Enter your choice (1, 2, 3, 4, 5 or 6): ")
     if choice == "1":
         user_name = input("What's your name? ")
         greet(user_name)
@@ -46,7 +64,9 @@ while True:
     elif choice == "4":
         count_visitors()
     elif choice == "5":
+        search_visitor()
+    elif choice == "6":
         print("Goodbye!")
         break
     else:
-        print("Please enter 1, 2, 3, 4 or 5.")
+        print("Please enter 1, 2, 3, 4, 5 or 6.")
