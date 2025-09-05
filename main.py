@@ -42,6 +42,15 @@ def search_visitor():
     except FileNotFoundError:
         print("No visitors yet!")
 
+def export_visitors():
+    try:
+        with open("visitors.txt", "r") as infile, open("exported_visitors.txt", "w") as outfile:
+            visitors = infile.readlines()
+            outfile.writelines(visitors)
+        print("Visitors exported to exported_visitors.txt!")
+    except FileNotFoundError:
+        print("No visitors to export!")
+
 def show_menu():
     print("\nWhat would you like to do?")
     print("1. Get greeted")
@@ -49,11 +58,12 @@ def show_menu():
     print("3. Clear visitor list")
     print("4. Show visitor count")
     print("5. Search for a visitor")
-    print("6. Exit")
+    print("6. Export visitors")
+    print("7. Exit")
 
 while True:
     show_menu()
-    choice = input("Enter your choice (1, 2, 3, 4, 5 or 6): ")
+    choice = input("Enter your choice (1, 2, 3, 4, 5, 6 or 7): ")
     if choice == "1":
         user_name = input("What's your name? ")
         greet(user_name)
@@ -66,7 +76,9 @@ while True:
     elif choice == "5":
         search_visitor()
     elif choice == "6":
+        export_visitors()
+    elif choice == "7":
         print("Goodbye!")
         break
     else:
-        print("Please enter 1, 2, 3, 4, 5 or 6.")
+        print("Please enter 1, 2, 3, 4, 5, 6 or 7.")
