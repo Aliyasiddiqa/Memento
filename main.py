@@ -3,19 +3,32 @@ def greet(name):
     with open("visitors.txt", "a") as file:
         file.write(name + "\n")
 
+def show_visitors():
+    print("\nVisitors so far:")
+    try:
+        with open("visitors.txt", "r") as file:
+            visitors = file.readlines()
+            for visitor in visitors:
+                print(visitor.strip())
+    except FileNotFoundError:
+        print("No visitors yet!")
+
 def show_menu():
     print("\nWhat would you like to do?")
     print("1. Get greeted")
-    print("2. Exit")
+    print("2. Show all visitors")
+    print("3. Exit")
 
 while True:
     show_menu()
-    choice = input("Enter your choice (1 or 2): ")
+    choice = input("Enter your choice (1, 2 or 3): ")
     if choice == "1":
         user_name = input("What's your name? ")
         greet(user_name)
     elif choice == "2":
+        show_visitors()
+    elif choice == "3":
         print("Goodbye!")
         break
     else:
-        print("Please enter 1 or 2.")
+        print("Please enter 1, 2 or 3.")
